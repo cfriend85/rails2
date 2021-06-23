@@ -1,0 +1,50 @@
+<h2>You have <%= session[:gold] %> gold</h2>
+<div class="container" style="display: flex; justify-content: space-evenly;">
+<div class="farm" style="border: solid black 2px; padding: 5px;">
+<h3>Farm</h3>
+<h4>(Earns 10-20 Gold)</h4>
+<form action="/rpg" method="POST">
+<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+<input type="hidden" value="Farm" name="location">
+<input type="submit">
+</form>
+</div>
+
+
+<div class="cave" style="border: solid black 2px; padding: 5px;">
+<h3>Cave</h3>
+<h4>(Earns 5-10 Gold)</h4>
+<form action="/rpg" method="POST">
+<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+<input type="hidden" value="Cave" name="location">
+<input type="submit">
+</form>
+</div>
+
+<div class="house" style="border: solid black 2px; padding: 5px;">
+<h3>House</h3>
+<h4>(Earns 2-5 Gold)</h4>
+<form action="/rpg" method="POST">
+<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+<input type="hidden" value="House" name="location">
+<input type="submit">
+</form>
+</div>
+
+<div class="casino" style="border: solid black 2px; padding: 5px;">
+<h3>Casino</h3>
+<h4>(Earns/Takes 0-50 Gold)</h4>
+<form action="/rpg" method="POST">
+<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+<input type="hidden" value="Casino" name="location">
+<input type="submit">
+</form>
+</div>
+</div>
+<h3>Activities:</h3>
+<textarea style="overflow-y: scroll" name="activites" id="activities" cols="250" rows="10"><%= session[:activities]%></textarea>
+
+
+
+
+

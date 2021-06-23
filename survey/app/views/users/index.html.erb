@@ -1,0 +1,19 @@
+<form action="/new_survey" method="POST">
+<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+Your Name: <input type="text" name="user[name]"><br>
+Your Location: <select name="user[location]">
+<option value="Boise">Boise</option>
+<option value="Seattle">Seattle</option>
+<option value="Dallas">Dallas</option>
+<option value="Arlington">Arlington</option>
+</select><br>
+Favorite Language: <select name="user[language]">
+<option value="Javascript">Javascript</option>
+<option value="Python">Python</option>
+<option value="C Sharp">C#</option>
+<option value="Java">Java</option>
+<option value="Ruby">Ruby</option>
+</select><br>
+Comment: <input type="textarea" name="user[comment]"><br>
+<input type="submit" value="Submit Survey!">
+</form>

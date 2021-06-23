@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body id="container" style="display: flex; justify-content: space-evenly;background-color: black;">
+    <form action="/register" method='POST' class="box" style="background-color: rgb(59, 70, 88);border:solid 2px black;border-radius: 15px;color: white;padding:50px 50px 35px 50px;margin-top: 200px;">
+        <% if flash[:errors] %>
+            <% flash[:errors].each do |e| %>
+        <p style="background-color: rgb(146, 0, 0);color: rgb(153, 153, 0);font-weight: 800;"><%= e %></p>
+            <% end %>
+        <% end %>
+        <h2 style="margin-left: 100px;">Register</h2><br>
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        Name: <input type= 'text'
+        name='user[name]' class="in" style="margin:5px 0px 5px 0px;padding-right: 87px;"><br>
+        E-mail: <input type= 'text'
+        name='user[email]' class="in" style="margin:5px 0px 5px 0px;padding-right: 82px;"><br>
+        Password: <input type='password'
+        name="user[password]"class="in" style="margin:5px 0px 5px 0px;padding-right: 64px;"><br>
+        Confirm password: <input type='password'
+        name="user[password_confirmation]"class="in" style="margin:5px 0px 0px 5px;"><br>
+        <input type="submit" value="Register" style="background-color: rgb(34, 77, 133);color: white;border-radius: 15px;margin: 30px 0px 0px 110px;">
+    </form>
+    <form action="/login" method='POST' class="box" style="background-color: rgb(59, 70, 88);border:solid 2px black;border-radius: 15px;color: white;padding:50px 50px 35px 50px;margin-top: 200px;">
+            <% if flash[:login] %>
+            <% flash[:login].each do |e| %>
+        <p style="background-color: rgb(146, 0, 0);color: rgb(153, 153, 0);font-weight: 800;"><%= e %></p>
+            <% end %>
+        <% end %>
+        <h2 style="margin-left: 100px;">Log In</h2><br>
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        E-mail: <input type= 'text'
+        name='user[email]' class="in" style="margin:5px 0px 5px 0px;padding-right: 72px;"><br>
+        Password: <input type='password'
+        name='user[password]' class="in" style="margin:5px 0px 5px 0px;padding-right: 54px;"><br>
+        <input type="submit" value="Log In" style="background-color: rgb(34, 77, 133);color: white;border-radius: 15px;margin: 30px 0px 0px 110px;">
+    </form>
+</body>
+</html>
