@@ -1,0 +1,36 @@
+<div id="container">
+<div class="jumbotron">
+  <h1 class="display-3">Welcome, <%= current_user.first_name %></h1>
+  <a class="btn btn-warning btn-lg" href="/logout" role="button" style="margin-top: 20px; height: 50px;">Logout</a>
+</div>
+_________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+<h2 id="add_book">Add a Favorite Book!</h2><br>
+<div class="content">
+<form action="/books/new" method="POST" class="form">
+<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    Title: <br><input type="text" name="title" style="background-color: white;"><br>
+    Description: <br><input type="text" name="description" style="background-color: white;"><br><br>
+    <input type="submit" value="Add!" class="btn btn-success" style="margin-left: 50px;">
+</form><br>
+<div class="books">
+<% @books.each do |book| %>
+<a href="/books/<%= book.id %>"><%= book.title %></a>
+<p>added by: <%= book.user.first_name %></p>
+    <% if not book.users.include?(current_user) %>
+    <form action="/like/<%= book.id %>" method="POST">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <input type="hidden" name="book_id" value="<%= book.id %>">
+    <input type="submit" name="like" value="Like" class="btn btn-success">
+    </form>
+  <% else %>
+    <form action="/unlike/<%= book.id %>" method="POST">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <input type="hidden" name="_method" value="delete">
+    <input type="hidden" name="book_id" value="<%= book.id %>">
+    <input type="submit" name="like" value="Un-Like" class="btn btn-danger">
+    </form>
+  <% end %>
+<% end %>
+</div>
+</div>
+</div>

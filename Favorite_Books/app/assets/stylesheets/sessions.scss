@@ -1,0 +1,30 @@
+// Place all the styles related to the Sessions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.body{
+    background-color: rgb(68, 65, 68);
+    display: flex;
+}
+.registration{
+    background-color: rgb(68, 65, 68);
+    border: solid black 3px;
+    margin-left: 500px;
+    margin-top: 200px;
+    padding: 50px;
+}
+
+.login{
+    background-color: rgb(68, 65, 68);
+    border: solid black 3px;
+    margin-left: 100px;
+    margin-top: 200px;
+    padding: 50px;
+}
+
+.label{
+    color: white
+}
+
+.sign-in{
+    margin-top: 25px;
+}

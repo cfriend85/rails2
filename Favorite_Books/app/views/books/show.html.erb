@@ -1,0 +1,29 @@
+<h1>Welcome, <%= current_user.first_name %></h1>
+<a href="/logout"><button class="btn btn-danger">Logout</button></a><br>
+_____________________________________________________________________________
+<% if @book.user_id == current_user.id %>
+<form action="/books/update/<%= @book.id %>" method="POST">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    Book Title: <input type="text" name="title" value="<%= @book.title %>"><br>
+    <h3>Added by: <%= @book.user.first_name %></h3>
+    <h3>Added on: <%= @book.created_at %></h3>
+    <h3>Last Updated on: <%= @book.updated_at %></h3>
+    Book Description: <input type="text" name="description" value="<%= @book.description %>"><br>
+    <input type="submit" value="Update" class="btn btn-warning">
+</form>
+
+<% else %>
+
+<h1><%= @book.title %></h1>
+<h3>Added by: <%= @book.user.first_name %></h3>
+<h3>Added on: <%= @book.created_at %></h3>
+<h3>Last Updated on: <%= @book.updated_at %></h3>
+<h3>Description: <%= @book.description %></h3>
+<br>
+<h2 style="text-decoration: underline">Users who liked this book:</h2>
+<% @favorites.each do |favorite| %>
+<h3><%= favorite.user.first_name %></h3>
+    
+    <% end %>
+<% end %>
+

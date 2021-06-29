@@ -1,0 +1,125 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+<h1>Welcome, <%= @user.first_name %></h1>
+<button class="btn btn-primary"><a href="/edit/<%= @user.id %>" style="color: white; text-decoration: none;">Edit my profile</a></button>
+<button class="btn btn-primary"><a href="/logout" style="color: white; text-decoration: none;">Logout</a></button>
+
+<h3>Events in your state:</h3>
+
+<table class="table table-hover">
+    <thead>
+    <tr>
+    <th>Name</th>
+    <th>Date</th>
+    <th>Location</th>
+    <th>Host</th>
+    <th>Actions</th>
+    </tr>
+    </thead>
+<% @events.each do |event| %>
+    <tbody>
+    <tr>
+    <td><a href="/events/<%= event.id %>"><%= event.name %></a></td>
+    <td><%= event.date.strftime("%m/%d/%Y")%></td>
+    <td><%= event.city %></td>
+    <td><%= event.user.first_name %></td>
+    <td>
+    <% if not event.users_attending.include?(current_user) %>
+      <form action="/new/attendee/<%= event.id %>" method="POST">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <input type="hidden" name="user_id" value="<%= current_user.id %>">
+          <input type="hidden" name="event_id" value="<%= event.id %>">
+          <input type="submit" name="like" value="Attend" class="btn btn-primary">
+      </form>
+    <% else %>
+         <form action="/remove/attendee/<%= event.id %>" method="POST">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <input type="hidden" name="_method" value="delete">
+          <input type="hidden" name="user_id" value="<%= current_user.id %>">
+          <input type="hidden" name="event_id" value="<%= event.id %>">
+          <input type="submit" name="like" value="Un-Attend" class="btn btn-danger">
+      </form>
+      <% end %>
+          <% if current_user == event.user %>
+          <form action="/event/delete/<%= event.id %>" method="POST">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <input type="hidden" name="_method" value="delete">
+          <input type="hidden" name="user_id" value="<%= current_user.id %>">
+          <input type="hidden" name="event_id" value="<%= event.id %>">
+          <input type="submit" name="like" value="Delete" class="btn btn-danger">
+      </form>
+  <% end %>
+    </td>
+    </tr>
+    <% end %>
+</tbody>
+</table>
+
+<h3>Events in other states:</h3>
+
+<table class="table table-hover">
+    <thead>
+    <tr>
+    <th>Name</th>
+    <th>Date</th>
+    <th>Location</th>
+    <th>State</th>
+    <th>Host</th>
+    <th>Actions</th>
+    </tr>
+    </thead>
+<% @other_events.each do |other_event| %>
+    <tbody>
+    <tr>
+    <td><a href="/events/<%= other_event.id %>"><%= other_event.name %></a></td>
+    <td><%= other_event.date.strftime("%m/%d/%Y") %></td>
+    <td><%= other_event.city %></td>
+    <td><%= other_event.state %></td>
+    <td><%= other_event.user.first_name %></td>
+    <td>
+    <% if not other_event.users_attending.include?(current_user) %>
+      <form action="/new/attendee/<%= other_event.id %>" method="POST">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <input type="hidden" name="user_id" value="<%= current_user.id %>">
+          <input type="hidden" name="event_id" value="<%= other_event.id %>">
+          <input type="submit" name="like" value="Attend" class="btn btn-primary">
+      </form>
+    <% else %>
+         <form action="/remove/attendee/<%= other_event.id %>" method="POST">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <input type="hidden" name="_method" value="delete">
+          <input type="hidden" name="user_id" value="<%= current_user.id %>">
+          <input type="hidden" name="event_id" value="<%= other_event.id %>">
+          <input type="submit" name="like" value="Un-Attend" class="btn btn-danger">
+      </form>
+    <% end %>
+    </td>
+    </tr>
+    <% end %>
+</tbody>
+</table>
+
+<form action="/events/new" method="POST" style="border: solid 2px black; width: 500px">
+<h1>Add an Event!</h1>
+    <% if flash[:errors] %>
+        <% flash[:errors].each do |e| %>
+    <p style="background-color: rgb(146, 0, 0);color: rgb(153, 153, 0);font-weight: 800;"><%= e %></p>
+        <% end %>
+    <% end %>
+<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <div class="form-group">
+    <label for="formGroupExampleInput">Event Name</label>
+    <input type="text" class="form-control" name="event[name]" placeholder="Name of your event">
+  </div>
+  <div class="form-group">
+    <label for="formGroupExampleInput2">Event Date</label>
+    <input type="date" class="form-control" name="event[date]">
+  </div>
+    <div class="form-group">
+    <label for="formGroupExampleInput2">Event Location</label>
+    <input type="text" class="form-control" name="event[city]" placeholder="City">
+    <input type="text" class="form-control" name="event[state]" placeholder="TX, CO or CA">
+  </div>
+    <input input type="hidden" name="event[user_id]" value="<%= @user.id %>">
+    <input type="submit" value="Add Event!" class="btn btn-success">
+</form>

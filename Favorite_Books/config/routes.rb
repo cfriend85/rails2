@@ -1,21 +1,21 @@
 Rails.application.routes.draw do
-  get '/' => 'sessions#new'
-  post '/register' => 'sessions#create'
-  post '/login' => 'sessions#login'
-  get '/users/:id' => 'users#show'
-  get '/logout' => 'sessions#destroy'
-  get '/edit/:id' => 'users#edit'
-  patch 'edit/:id' => 'users#update'
-  delete '/delete' => 'users#destroy'
-  
-  get '/secrets' => 'secrets#index'
-  get '/secrets/add/:id' => 'secrets#add'
-  post '/secrets/create/:id' => 'secrets#create'
-  delete '/secrets/:id' => 'secrets#destroy'
-  post '/likes/new' => 'likes#create'
-  delete '/unlike/new/:id' => 'likes#destroy'
 
-  get '*path' => redirect("/users/:id")
+get '/' => 'sessions#index'
+post '/new' => 'sessions#new'
+post '/show' => 'sessions#show'
+get '/logout' => 'sessions#destroy'
+
+get '/books' => 'books#index'
+post '/books/new' => 'books#create'
+get '/books/:id' => 'books#show'
+post '/books/update/:id' => 'books#update'
+
+
+post '/like/:id' => 'favorites#new'
+delete '/unlike/:id' => 'favorites#destroy'
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

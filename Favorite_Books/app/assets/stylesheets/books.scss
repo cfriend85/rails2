@@ -1,0 +1,35 @@
+// Place all the styles related to the Books controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com
+* {
+    background-color: rgb(56, 55, 65);
+    color: white
+}
+
+.jumbotron{
+    display: flex;
+    justify-content: space-between;
+    color: white
+}
+
+.books {
+    border: solid 5px black;
+    padding: 10px;
+    width: 700px;
+    margin-left: 200px;
+}
+
+.content {
+    display: flex;
+    color: white
+}
+
+.form{
+    border: solid 5px black;
+    padding: 10px;
+    height: 200px;
+}
+
+#add_book {
+    color: white
+}

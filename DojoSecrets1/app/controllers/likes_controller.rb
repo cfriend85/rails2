@@ -15,6 +15,6 @@ class LikesController < ApplicationController
     private
     def require_authorization
         redirect_to "/users/#{current_user.id}" unless current_user.id == params[:id].to_i
-      end
-      helper_method :require_authorization
+    end
+    helper_method :require_authorization
 end

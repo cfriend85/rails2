@@ -1,0 +1,47 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+<h1><%= @event.name %></h1>
+<h2>Host: <%= @event.user.first_name %> <%= @event.user.last_name %></h2>
+<h3>Date: <%= @event.date.strftime("%m/%d/%Y") %></h3>
+<h3>Location: <%= @event.city %>, <%= @event.state %></h3>
+
+<h3>Event Attendees: <%= @attendees.count %></h3>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+    <th>Name</th>
+    <th>Date</th>
+    <th>City</th>
+    <th>State</td>
+    </tr>
+    </thead>
+<% @attendees.each do |attendee| %>
+    <tbody>
+    <tr>
+    <td><%= attendee.user.first_name %></td>
+    <td><%= attendee.user.last_name %></td>
+    <td><%= attendee.user.city %></td>
+    <td><%= attendee.user.state %></td>
+    <% end %>
+</tbody>
+</table> 
+
+
+<a href="/events"<button class="btn btn-primary">Events Dashboard</button></a>&nbsp&nbsp<a href="/logout"><button class="btn btn-primary">Logout</button></a>
+
+<h3>Discussion Board:</h3>
+
+<textarea style="overflow-y: scroll" name="activites" id="activities" cols="250" rows="10">
+<% @comments.each do |comment| %>
+<%= comment.user.first_name %> says: "<%= comment.content %>"
+____________________________________________________
+<% end %>
+</textarea>
+
+<h3>Add a Comment!</h3>
+<form action="/comment/new/<%= @event.id %>" method="POST">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <input type="text" name="content">
+    <input type="submit" value="Add Comment" class="btn btn-primary">
+</form>

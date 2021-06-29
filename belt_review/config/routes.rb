@@ -1,21 +1,27 @@
 Rails.application.routes.draw do
-  get '/' => 'sessions#new'
-  post '/register' => 'sessions#create'
+  get '/' => 'sessions#index'
+  post '/register' => 'sessions#register'
   post '/login' => 'sessions#login'
-  get '/users/:id' => 'users#show'
-  get '/logout' => 'sessions#destroy'
-  get '/edit/:id' => 'users#edit'
-  patch 'edit/:id' => 'users#update'
-  delete '/delete' => 'users#destroy'
-  
-  get '/secrets' => 'secrets#index'
-  get '/secrets/add/:id' => 'secrets#add'
-  post '/secrets/create/:id' => 'secrets#create'
-  delete '/secrets/:id' => 'secrets#destroy'
-  post '/likes/new' => 'likes#create'
-  delete '/unlike/new/:id' => 'likes#destroy'
+  get '/logout' => 'sessions#logout'
 
-  get '*path' => redirect("/users/:id")
+
+  get '/events' => 'events#index'
+  post '/events/new' => 'events#add'
+  get '/events/:id' => 'events#show'
+  post '/new/attendee/:id' => 'events#new_attendee'
+  delete '/remove/attendee/:id' => 'events#destroy_attendee'
+  delete '/event/delete/:id' => 'events#destroy'
+  post '/comment/new/:id' => 'events#new_comment'
+
+
+
+  get '/users/:id' => 'users#index'
+  get '/edit/:id' => 'users#edit'
+  patch '/update/:id' => 'users#update'
+  
+
+  # get '*path' => redirect("/users/:id")
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -30,4 +36,5 @@ Rails.application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
+  #   end
 end
