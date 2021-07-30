@@ -27,3 +27,21 @@ when "add"
     else
         puts "Error!"
     end 
+
+#  Convert input from string to both a symbol for the title and a an integer for the number so that when added to the hash it's in the correct format
+    case choice
+    when "add"
+        puts "What movie would you like to add? "
+            title = gets.chomp.to_sym
+        puts "What rating does the movie have? "
+            rating = gets.chomp.to_i
+        movies[title] = rating
+    when "update"
+        puts "Updated!"
+    when "display"
+        puts "Movies!"
+    when "delete"
+        puts "Deleted!"
+    else
+        puts "Error!"
+    end
