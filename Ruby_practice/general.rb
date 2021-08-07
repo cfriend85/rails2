@@ -17,3 +17,40 @@ def scoring(array)
         user.update_score unless user.is_admin?
     end
 end
+
+
+# break/if condition
+loop do
+    coder.practice
+    break if coder.oh_one?
+end
+
+# one line until statement
+coder.practice until coder.oh_one?
+
+# Case statement
+def identify_class(obj)
+    case obj
+        when Hacker
+            puts "It's a Hacker!"
+        when Submission
+            puts "It's a Submission!"
+        when TestCase
+            puts "It's a TestCase!"
+        when Contest
+            puts "It's a Contest!"
+        else
+            puts "It's an unknown model"
+    end
+end
+
+
+def factorial(n)
+    result = (1..n).reduce(1) { |all,x| all * x }
+    yield(result)
+end
+
+n = gets.to_i
+factorial(n) do |result| 
+    puts result
+end  
