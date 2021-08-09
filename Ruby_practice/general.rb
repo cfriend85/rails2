@@ -54,3 +54,10 @@ n = gets.to_i
 factorial(n) do |result| 
     puts result
 end  
+
+# init empty array
+array = Array.new
+# init array with an element which is nil
+array_1 = Array.new(1)
+# init array with 2 elements each with a value of 10
+array_2 = Array.new(2, 10)
