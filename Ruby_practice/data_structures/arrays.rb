@@ -62,6 +62,10 @@ array_1 = Array.new(1)
 array_2 = Array.new(2, 10)
 
 
+
+# Find and insert
+
+
 def neg_pos(arr, index)
     # return the element of the array at the position `index` from the end of the list
     # Clue : arr[-index]
@@ -108,4 +112,55 @@ end
 def index_arr_multiple_add(arr, index)
     # add any two elements to the arr at the index
     arr.insert(index, 1,2)
+end
+
+
+
+# Delete elements
+
+
+def end_arr_delete(arr)
+    # delete the element from the end of the array and return the deleted element
+    arr.pop
+    
+end
+
+def start_arr_delete(arr)
+    # delete the element at the beginning of the array and return the deleted element
+    arr.shift
+end
+
+def delete_at_arr(arr, index)
+    # delete the element at the position #index
+    arr.delete_at(index)
+    
+end
+
+def delete_all(arr, val)
+    # delete all the elements of the array where element = val
+    arr.delete(val)
+    
+end
+
+
+# Array selection
+
+def select_arr(arr)
+    # select and return all odd numbers from the Array variable `arr`
+        arr.select {|x| x % 2 != 0}
+end
+
+def reject_arr(arr)
+    # reject all elements which are divisible by 3
+        arr.reject {|x| x % 3 == 0}
+end
+
+def delete_arr(arr)
+    # delete all negative elements
+    arr.delete_if {|x| x < 0}
+end
+
+def keep_arr(arr)
+    # keep all non negative elements ( >= 0)
+    arr.keep_if {|x| x >= 0}
 end
